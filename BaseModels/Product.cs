@@ -2,7 +2,7 @@
 {
     public class Product
     {
-        public Product(string fullName, string displayName, string descripiton, double price, bool isActive, DateTime creationDate, DateTime expireDate, int availableQty, DateTime modificationDate, bool isDeleted, DateTime deletedDate, int timesViewed, int timesBuyed, int categoryId)
+        public Product(string fullName, string displayName, string descripiton, double price, bool isActive, DateTime creationDate, DateTime expireDate, int availableQty, bool isDeleted, int timesViewed, int timesBuyed, int categoryId, DateTime? deletedDate = null, DateTime? modificationDate = null)
         {
             FullName = fullName;
             DisplayName = displayName;
@@ -29,12 +29,17 @@
         public DateTime CreationDate { get; set; }
         public DateTime ExpireDate { get; set; }
         public int AvailableQty { get; set; }
-        public DateTime ModificationDate { get; set; }
+        public DateTime? ModificationDate { get; set; }
         public bool IsDeleted { get; set; }
-        public DateTime DeletedDate { get; set; }
+        public DateTime? DeletedDate { get; set; }
         public int TimesViewed { get; set; }
         public int TimesBuyed { get; set; }
         public int CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+        public virtual Category? Category { get; set; }
+
+        public virtual string DisplayProductInformation()
+        {
+            return $"Name: {FullName}, Description: {Descripiton}, Price: {Price}";
+        }
     }
 }

@@ -12,5 +12,9 @@ namespace OOP_ecommerce.Models.Users
             Permissions = permissions;
             AssignedDepartments = assignedDepartments;
         }
+        public override string ToString()
+        {
+            return $"Admin User: {FirstName} {LastName} with email {Email}";
+        }
     }
 }

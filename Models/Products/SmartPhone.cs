@@ -4,13 +4,19 @@ namespace OOP_ecommerce.Models.Products
 {
     public class SmartPhone : Product
     {
-        public double ScreenSize { get; set; }
-        public int CameraCount { get; set; }
-        public SmartPhone(string fullName, string displayName, string descripiton, double price, bool isActive, DateTime creationDate, DateTime expireDate, int availableQty, DateTime modificationDate, bool isDeleted, DateTime deletedDate, int timesViewed, int timesBuyed, int categoryId, double screenSize, int cameraCount) :
-            base(fullName, displayName, descripiton, price, isActive, creationDate, expireDate, availableQty, modificationDate, isDeleted, deletedDate, timesViewed, timesBuyed, categoryId)
+        public SmartPhone(string fullName, string displayName, string descripiton, double price, bool isActive, DateTime creationDate, DateTime expireDate, int availableQty, bool isDeleted, int timesViewed, int timesBuyed, int categoryId, double screenSize, int cameraCount, DateTime? deletedDate = null, DateTime? modificationDate = null) : 
+            base(fullName, displayName, descripiton, price, isActive, creationDate, expireDate, availableQty, isDeleted, timesViewed, timesBuyed, categoryId, deletedDate, modificationDate)
         {
             ScreenSize = screenSize;
             CameraCount = cameraCount;
         }
+
+        public double ScreenSize { get; set; }
+        public int CameraCount { get; set; }
+        public override string DisplayProductInformation()
+        {
+            return $"SmartPhone Data = Name: {FullName}, Description: {Descripiton}, Price: {Price}, Cameras: {CameraCount}";
+        }
+
     }
 }

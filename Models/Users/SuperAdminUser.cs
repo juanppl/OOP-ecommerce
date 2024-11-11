@@ -13,5 +13,9 @@ namespace OOP_ecommerce.Models.Users
             GlobalPermissions = globalPermissions;
             RoleManagementPermissions = roleManagementPermissions;
         }
+        public override string ToString()
+        {
+            return $"Super Admin User: {FirstName} {LastName} with email {Email}";
+        }
     }
 }

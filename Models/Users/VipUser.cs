@@ -12,5 +12,9 @@ namespace OOP_ecommerce.Models.Users
         public decimal TaxesDiscount { get; private set; } = 0.02M;
         public virtual ICollection<Order> Order { get; set; }
         public virtual ICollection<ChatbotConversation> ChatbotConversation { get; set; }
+        public override string ToString()
+        {
+            return $"Vip User: {FirstName} {LastName} with email {Email}";
+        }
     }
 }
