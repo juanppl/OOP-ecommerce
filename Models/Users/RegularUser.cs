@@ -8,6 +8,7 @@ namespace OOP_ecommerce.Models.Users
             base(firstName, lastName, email, password, userName, bio, isActive)
         {
         }
+        public decimal SeasonDiscount { get; private set; } = 0.02M;
         public virtual ICollection<Order> Order { get; set; }
         public virtual ICollection<ChatbotConversation> ChatbotConversation { get; set; }
     }
