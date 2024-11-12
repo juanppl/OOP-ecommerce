@@ -1,8 +1,9 @@
 ﻿using OOP_ecommerce.BaseModels;
+using OOP_ecommerce.Interfaces;
 
 namespace OOP_ecommerce.Models.Users
 {
-    public class AdminUser : User
+    public class AdminUser : User, IPermissions
     {
         public List<string> Permissions { get; set; }
         public List<int> AssignedDepartments { get; set; }

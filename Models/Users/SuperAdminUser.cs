@@ -1,8 +1,9 @@
 ﻿using OOP_ecommerce.BaseModels;
+using OOP_ecommerce.Interfaces;
 
 namespace OOP_ecommerce.Models.Users
 {
-    public class SuperAdminUser : User
+    public class SuperAdminUser : User, IPermissions
     {
         public List<string> GlobalPermissions { get; set; }
         public bool RoleManagementPermissions { get; set; }
@@ -17,7 +18,7 @@ namespace OOP_ecommerce.Models.Users
         {
             return $"Super Admin User: {FirstName} {LastName} with email {Email}";
         }
-        public void AddGlobalPermission(string permission)
+        public void AddPermission(string permission)
         {
             if (!GlobalPermissions.Contains(permission))
             {
@@ -30,7 +31,7 @@ namespace OOP_ecommerce.Models.Users
             }
         }
 
-        public void AddGlobalPermission(List<string> permissions)
+        public void AddPermission(List<string> permissions)
         {
             foreach (var permission in permissions)
             {

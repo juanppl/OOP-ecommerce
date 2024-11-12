@@ -1,9 +1,10 @@
 ﻿
 using OOP_ecommerce.BaseModels;
+using OOP_ecommerce.Interfaces;
 
 namespace OOP_ecommerce.Models.Products
 {
-    public class Laptop : Product
+    public class Laptop : Product, IProductPrice
     {
         public Laptop(string fullName, string displayName, string descripiton, double price, bool isActive, DateTime creationDate, DateTime expireDate, int availableQty, bool isDeleted, int timesViewed, int timesBuyed, int categoryId, string batteryBrand, int batteryLifeTime, DateTime? deletedDate = null, DateTime? modificationDate = null) : 
             base(fullName, displayName, descripiton, price, isActive, creationDate, expireDate, availableQty, isDeleted, timesViewed, timesBuyed, categoryId, deletedDate, modificationDate)

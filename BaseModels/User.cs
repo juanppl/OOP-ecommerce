@@ -1,4 +1,6 @@
-﻿namespace OOP_ecommerce.BaseModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OOP_ecommerce.BaseModels
 {
     public abstract class User
     {
@@ -14,9 +16,17 @@
         }
 
         public int UserId { get; set; }
+
+        [StringLength(50, ErrorMessage = "El nombre no puede exceder los 50 caracteres.")]
         public string FirstName { get; set; }
+
+        [StringLength(50, ErrorMessage = "El nombre completo no puede exceder los 50 caracteres.")]
         public string LastName { get; set; }
+
+        [EmailAddress(ErrorMessage = "El correo electrónico no tiene un formato válido.")]
         public string Email { get; set; }
+
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "La contraseña debe tener al menos 8 caracteres.")]
         public string Password { get; set; }
         public string UserName { get; set; }
         public string Bio { get; set; }

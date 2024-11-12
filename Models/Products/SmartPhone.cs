@@ -1,8 +1,9 @@
 ﻿using OOP_ecommerce.BaseModels;
+using OOP_ecommerce.Interfaces;
 
 namespace OOP_ecommerce.Models.Products
 {
-    public class SmartPhone : Product
+    public class SmartPhone : Product, IProductPrice
     {
         public SmartPhone(string fullName, string displayName, string descripiton, double price, bool isActive, DateTime creationDate, DateTime expireDate, int availableQty, bool isDeleted, int timesViewed, int timesBuyed, int categoryId, double screenSize, int cameraCount, DateTime? deletedDate = null, DateTime? modificationDate = null) : 
             base(fullName, displayName, descripiton, price, isActive, creationDate, expireDate, availableQty, isDeleted, timesViewed, timesBuyed, categoryId, deletedDate, modificationDate)
