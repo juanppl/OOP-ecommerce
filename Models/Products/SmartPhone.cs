@@ -17,6 +17,33 @@ namespace OOP_ecommerce.Models.Products
         {
             return $"SmartPhone Data = Name: {FullName}, Description: {Descripiton}, Price: {Price}, Cameras: {CameraCount}";
         }
+        public void CalculatePrice(double discountPercentage, bool applyDiscount)
+        {
+            if (applyDiscount)
+            {
+                double discountAmount = Price * (discountPercentage / 100);
+                Price -= discountAmount;
+                Console.WriteLine($"Price for {DisplayName} updated with {discountPercentage}% discount. New price: {Price:C}");
+            }
+            else
+            {
+                Console.WriteLine("Discount application failed, no discount applied.");
+            }
+        }
+
+        public void CalculatePrice(List<double> discountPercentage, bool applyDiscount)
+        {
+            if (applyDiscount)
+            {
+                double discountAmount = Price * (discountPercentage.Sum() / 100);
+                Price -= discountAmount;
+                Console.WriteLine($"Price for {DisplayName} updated with {discountPercentage}% discount. New price: {Price:C}");
+            }
+            else
+            {
+                Console.WriteLine("Discount application failed, no discount applied.");
+            }
+        }
 
     }
 }

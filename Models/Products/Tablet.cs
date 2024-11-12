@@ -13,6 +13,33 @@ namespace OOP_ecommerce.Models.Products
 
         public int BatteryLifeTime { get; set; }
         public string Color { get; set; }
-        
+        public void CalculatePrice(double discountPercentage, bool applyDiscount)
+        {
+            if (applyDiscount)
+            {
+                double discountAmount = Price * (discountPercentage / 100);
+                Price -= discountAmount;
+                Console.WriteLine($"Price for {DisplayName} updated with {discountPercentage}% discount. New price: {Price:C}");
+            }
+            else
+            {
+                Console.WriteLine("Discount application failed, no discount applied.");
+            }
+        }
+
+        public void CalculatePrice(List<double> discountPercentage, bool applyDiscount)
+        {
+            if (applyDiscount)
+            {
+                double discountAmount = Price * (discountPercentage.Sum() / 100);
+                Price -= discountAmount;
+                Console.WriteLine($"Price for {DisplayName} updated with {discountPercentage}% discount. New price: {Price:C}");
+            }
+            else
+            {
+                Console.WriteLine("Discount application failed, no discount applied.");
+            }
+        }
+
     }
 }

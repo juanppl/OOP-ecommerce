@@ -17,5 +17,29 @@ namespace OOP_ecommerce.Models.Users
         {
             return $"Super Admin User: {FirstName} {LastName} with email {Email}";
         }
+        public void AddGlobalPermission(string permission)
+        {
+            if (!GlobalPermissions.Contains(permission))
+            {
+                GlobalPermissions.Add(permission);
+                Console.WriteLine($"Permission '{permission}' added.");
+            }
+            else
+            {
+                Console.WriteLine($"Permission '{permission}' already exists.");
+            }
+        }
+
+        public void AddGlobalPermission(List<string> permissions)
+        {
+            foreach (var permission in permissions)
+            {
+                if (!GlobalPermissions.Contains(permission))
+                {
+                    GlobalPermissions.Add(permission);
+                    Console.WriteLine($"Permission '{permission}' added.");
+                }
+            }
+        }
     }
 }

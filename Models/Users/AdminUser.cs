@@ -16,5 +16,30 @@ namespace OOP_ecommerce.Models.Users
         {
             return $"Admin User: {FirstName} {LastName} with email {Email}";
         }
+
+        public void AddPermission(string permission)
+        {
+            if (!Permissions.Contains(permission))
+            {
+                Permissions.Add(permission);
+                Console.WriteLine($"Permission '{permission}' added.");
+            }
+            else
+            {
+                Console.WriteLine($"Permission '{permission}' already exists.");
+            }
+        }
+
+        public void AddPermission(List<string> permissions)
+        {
+            foreach (var permission in permissions)
+            {
+                if (!Permissions.Contains(permission))
+                {
+                    Permissions.Add(permission);
+                    Console.WriteLine($"Permission '{permission}' added.");
+                }
+            }
+        }
     }
 }
