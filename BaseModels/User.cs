@@ -31,9 +31,18 @@ namespace OOP_ecommerce.BaseModels
         public string UserName { get; set; }
         public string Bio { get; set; }
         public bool IsActive { get; set; }
+        public string TokenSesion { get; private set; }
         public override string ToString()
         {
             return $"User: {FirstName} {LastName} with email {Email}";
+        }
+        public bool IsAuthenticated()
+        {
+            return true;
+        }
+        public void setTokenSession(string tokenSession)
+        {
+            TokenSesion = tokenSession;
         }
     }
 }
