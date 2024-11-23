@@ -1,4 +1,5 @@
 ﻿using OOP_ecommerce.BaseModels;
+using OOP_ecommerce.Utils;
 
 namespace OOP_ecommerce.Services
 {
@@ -6,6 +7,7 @@ namespace OOP_ecommerce.Services
     {
         public List<Order> Orders;
         private Dictionary<int, User> _users;
+        private LogManager _logger = LogManager.GetInstance();
 
         public OrderManagment()
         {
@@ -19,6 +21,7 @@ namespace OOP_ecommerce.Services
             var nuevaOrden = new Order("Nueva", userId, products);
             Orders.Add(nuevaOrden);
             Console.WriteLine($"Orden {nuevaOrden.OrderId} creada para el usuario {userId}.");
+            _logger.Log($"Orden {nuevaOrden.OrderId} creada para el usuario {userId}.");
             return nuevaOrden;
         }
 
@@ -28,6 +31,7 @@ namespace OOP_ecommerce.Services
             var order = Orders.FirstOrDefault(o => o.OrderId == orderId);
             if (order == null)
             {
+                _logger.Log("Orden no encontrada.");
                 Console.WriteLine("Orden no encontrada.");
                 return false;
             }
@@ -36,11 +40,13 @@ namespace OOP_ecommerce.Services
             if (!user.IsAuthenticated() || user.TokenSesion != tokenSesion)
             {
                 Console.WriteLine("El usuario no está autenticado.");
+                _logger.Log("El usuario no está autenticado.");
                 return false;
             }
 
             order.IsAuthorized = true;
             Console.WriteLine($"Orden {orderId} autorizada. El monto total es {order.TotalAmount:C}.");
+            _logger.Log($"Orden {orderId} autorizada. El monto total es {order.TotalAmount:C}.");
             return true;
         }
 

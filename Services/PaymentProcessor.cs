@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
 using OOP_ecommerce.Interfaces;
 using OOP_ecommerce.Models.Orders;
+using OOP_ecommerce.Utils;
 
 namespace OOP_ecommerce.Services
 {
@@ -8,6 +10,7 @@ namespace OOP_ecommerce.Services
     {
         private List<Payment> _payments;
         private OrderManagment _orderManagment;
+        private LogManager _logger = LogManager.GetInstance();
 
         public PaymentProcessor(OrderManagment orderManagment)
         {
@@ -21,12 +24,14 @@ namespace OOP_ecommerce.Services
             if (order == null || !order.IsAuthorized)
             {
                 Console.WriteLine("La orden no está autorizada.");
+                _logger.Log("La orden no está autorizada.");
                 return null;
             }
 
             var payment = new Payment(_payments.Count + 1, orderId, order.TotalAmount, paymentProcess.GetType().Name);
             _payments.Add(payment);
             Console.WriteLine($"payment de {payment.Amount:C} creado para la orden {orderId} con el método {paymentProcess.GetType().Name}.");
+            _logger.Log($"payment de {payment.Amount:C} creado para la orden {orderId} con el método {paymentProcess.GetType().Name}.");
             return payment;
         }
 
@@ -37,6 +42,7 @@ namespace OOP_ecommerce.Services
             if (payment == null)
             {
                 Console.WriteLine("payment no encontrado.");
+                _logger.Log("payment no encontrado.");
                 return;
             }
 
@@ -49,10 +55,12 @@ namespace OOP_ecommerce.Services
                     orden.IsPaid = true;
                 }
 
+                _logger.Log($"payment de la orden {payment.OrderId} confirmado.");
                 Console.WriteLine($"payment de la orden {payment.OrderId} confirmado.");
             }
             else
             {
+                _logger.Log("payment fallido.");
                 Console.WriteLine("payment fallido.");
             }
         }

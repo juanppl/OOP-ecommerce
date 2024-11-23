@@ -1,9 +1,12 @@
 ﻿using OOP_ecommerce.BaseModels;
+using OOP_ecommerce.Utils;
 
 namespace OOP_ecommerce.Services
 {
     public class ProductsManagmentProcessor : ProductsManagment
     {
+        private LogManager _logger = LogManager.GetInstance();
+
         public ProductsManagmentProcessor() : base() { }
 
         // Implementación de añadir un producto al inventario
@@ -13,11 +16,13 @@ namespace OOP_ecommerce.Services
             if (existingProduct != null)
             {
                 Console.WriteLine($"El producto {product.FullName} ya existe en el inventario.");
+                _logger.Log($"El producto {product.FullName} ya existe en el inventario.");
             }
             else
             {
                 Inventory.Add(product);
                 Console.WriteLine($"Producto {product.FullName} añadido al inventario.");
+                _logger.Log($"Producto {product.FullName} añadido al inventario.");
             }
         }
 
@@ -29,10 +34,12 @@ namespace OOP_ecommerce.Services
             {
                 Inventory.Remove(product);
                 Console.WriteLine($"Producto {product.FullName} eliminado del inventario.");
+                _logger.Log($"Producto {product.FullName} eliminado del inventario.");
             }
             else
             {
                 Console.WriteLine("Producto no encontrado en el inventario.");
+                _logger.Log("Producto no encontrado en el inventario.");
             }
         }
 
@@ -44,10 +51,12 @@ namespace OOP_ecommerce.Services
             {
                 product.AvailableQty += amount;
                 Console.WriteLine($"Stock de {product.FullName} actualizado. Nueva cantidad: {product.AvailableQty}");
+                _logger.Log($"Stock de {product.FullName} actualizado. Nueva cantidad: {product.AvailableQty}");
             }
             else
             {
                 Console.WriteLine("Producto no encontrado en el inventario.");
+                _logger.Log("Producto no encontrado en el inventario.");
             }
         }
     }
