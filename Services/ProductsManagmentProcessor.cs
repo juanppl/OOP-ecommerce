@@ -1,4 +1,5 @@
 ﻿using OOP_ecommerce.BaseModels;
+using OOP_ecommerce.Interfaces;
 using OOP_ecommerce.Utils;
 
 namespace OOP_ecommerce.Services
@@ -6,8 +7,32 @@ namespace OOP_ecommerce.Services
     public class ProductsManagmentProcessor : ProductsManagment
     {
         private LogManager _logger = LogManager.GetInstance();
+        private IProductFactory _productFactory;
 
-        public ProductsManagmentProcessor() : base() { }
+        public ProductsManagmentProcessor(
+            IProductFactory productFactory) : base()
+        {
+            _productFactory = productFactory;
+        }
+
+        public override Product CreateProduct(ProductType productType, string fullName, string displayName, string description, double price, bool isActive, DateTime creationDate, DateTime expireDate, int availableQty, bool isDeleted, int timesViewed, int timesBuyed, int categoryId, dynamic extraInfo1, dynamic extraInfo2)
+        {
+            switch (productType)
+            {
+                case ProductType.Desktop:
+                    return _productFactory.CreateDesktop(fullName, displayName, description, price, isActive, creationDate, expireDate, availableQty, isDeleted, timesViewed, timesBuyed, categoryId, extraInfo1, extraInfo2);
+                case ProductType.Laptop:
+                    return _productFactory.CreateLaptop(fullName, displayName, description, price, isActive, creationDate, expireDate, availableQty, isDeleted, timesViewed, timesBuyed, categoryId, extraInfo1, extraInfo2);
+                case ProductType.SmartWatch:
+                    return _productFactory.CreateSmartWatch(fullName, displayName, description, price, isActive, creationDate, expireDate, availableQty, isDeleted, timesViewed, timesBuyed, categoryId, extraInfo1, extraInfo2);
+                case ProductType.SmartPhone:
+                    return _productFactory.CreateSmartphone(fullName, displayName, description, price, isActive, creationDate, expireDate, availableQty, isDeleted, timesViewed, timesBuyed, categoryId, extraInfo1, extraInfo2);
+                case ProductType.Tablet:
+                    return _productFactory.CreateTablet(fullName, displayName, description, price, isActive, creationDate, expireDate, availableQty, isDeleted, timesViewed, timesBuyed, categoryId, extraInfo1, extraInfo2);
+                default:
+                    throw new ArgumentException("Unknown product type.");
+            }
+        }
 
         // Implementación de añadir un producto al inventario
         public override void AddProduct(Product product)

@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OOP_ecommerce.BaseModels;
+using OOP_ecommerce.Interfaces;
 using OOP_ecommerce.Models.Products;
+using OOP_ecommerce.Services;
+using OOP_ecommerce.Services.Users;
+using OOP_ecommerce.Utils;
 
 namespace OOP_ecommerce.Controllers
 {
@@ -16,6 +20,18 @@ namespace OOP_ecommerce.Controllers
             products.ForEach(p => {
                 Console.WriteLine(p.DisplayProductInformation());
             });
+            User adminUser = UserFactory.CreateUser("admin", "Carlos", "Perez", "carlos@test.com", "password123", "carlosp", "Administrador de sistemas", true, new List<string> { "ManageUsers", "AccessReports" }, new List<int> { 1, 2 });
+            Console.WriteLine(adminUser.ToString());
+
+            User superAdmin = UserFactory.CreateUser("superadmin", "Juan", "Paramo", "juan@test.com", "password123", "juanp", "Superadmin", true);
+            Console.WriteLine(superAdmin.ToString());
+
+            IProductFactory productFactory = new ProductsFactory();
+            ProductsManagment productManager = new ProductsManagmentProcessor(productFactory);
+
+            Product laptop = productManager.CreateProduct(ProductType.Laptop, "Gaming Laptop", "Super Fast Laptop", "A high-performance gaming laptop", 1500.00, true, DateTime.Now, DateTime.Now.AddYears(1), 10, false, 100, 50, 1, "Duracell", 10);
+            Console.WriteLine(laptop.DisplayProductInformation());
+
         }
 
         private List<Product> GenerateListOfProducts()
