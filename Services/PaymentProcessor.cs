@@ -20,7 +20,7 @@ namespace OOP_ecommerce.Services
 
         public Payment CreatePayment(int orderId, IProcessPayment paymentProcess)
         {
-            var order = _orderManagment.Orders.FirstOrDefault(o => o.OrderId == orderId);
+            var order = _orderManagment.GetOrders().FirstOrDefault(o => o.OrderId == orderId);
             if (order == null || !order.IsAuthorized)
             {
                 Console.WriteLine("La orden no está autorizada.");
@@ -49,7 +49,7 @@ namespace OOP_ecommerce.Services
             if (paymentProcess.VerifyPayment(payment.PaymentId, payment.Amount, "tokenSesion"))
             {
                 payment.IsSuccessfullPayment = true;
-                var orden = _orderManagment.Orders.FirstOrDefault(o => o.OrderId == payment.OrderId);
+                var orden = _orderManagment.GetOrders().FirstOrDefault(o => o.OrderId == payment.OrderId);
                 if (orden != null)
                 {
                     orden.IsPaid = true;

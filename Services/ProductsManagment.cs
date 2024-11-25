@@ -7,7 +7,7 @@ namespace OOP_ecommerce.Services
 {
     public abstract class ProductsManagment
     {
-        protected List<Product> Inventory { get; set; }
+        public List<Product> Inventory { get; set; }
 
         public ProductsManagment()
         {

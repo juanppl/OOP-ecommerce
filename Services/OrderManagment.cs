@@ -6,14 +6,16 @@ namespace OOP_ecommerce.Services
     public class OrderManagment
     {
         public List<Order> Orders;
-        private Dictionary<int, User> _users;
-        private LogManager _logger = LogManager.GetInstance();
+        public Dictionary<int, User> _users;
+        public LogManager _logger = LogManager.GetInstance();
 
         public OrderManagment()
         {
             Orders = new List<Order>();
             _users = new Dictionary<int, User>();
         }
+
+        public virtual List<Order> GetOrders() => Orders;
 
         // Crear una nueva orden
         public Order CreateOrder(int userId, List<Product> products)
